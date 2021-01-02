@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import Container from "@material-ui/core/Container";
+import Navbar from "./components/Navbar/Navbar";
+import CreatePage from "./components/CreatePage/CreatePage";
+import Page from "./components/Page/Page";
+import EditPage from "./components/EditPage/EditPage";
+import InputGroup from "./components/InputGroup/InputGroup";
+import PageGrid from "./components/PageGrid/PageGrid";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="app">
+        <Navbar />
+        <Container>
+          <Switch>
+            <Route exact path="/">
+              <InputGroup
+              />
+              <PageGrid/>
+            </Route>
+            <Route
+              path="/page/edit/:id"
+              render={(props) => <EditPage {...props} />}
+            />
+            <Route path="/page/new">
+              <CreatePage />
+            </Route>
+            <Route path="/page/:id" render={(props) => <Page {...props} />} />
+          </Switch>
+        </Container>
+      </div>
+    </Router>
   );
 }
 

@@ -1,0 +1,14 @@
+.createpage__form{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.createpage__input{
+    margin: 10px;
+}
+
+.createpage__button{
+    width: 10%;
+    margin: 10px;
+}
