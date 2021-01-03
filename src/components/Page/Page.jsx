@@ -3,11 +3,11 @@ import {connect} from 'react-redux'
 
 function Page(props) {
   const page = props.pages.filter(page => page.id === props.match.params.id)[0]
-  console.log(page.id)
   return (
     <div>
       <h1>{page.title}</h1>
       <p>{page.body}</p>
+      
     </div>
   );
 }

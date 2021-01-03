@@ -1,3 +1,4 @@
+import {v1} from 'uuid'
 import {
   ADD_PAGE,
   DELETE_PAGE,
@@ -10,22 +11,46 @@ import {
 const initialState = {
   pages: [
     {
-      id: "efgbtdfhghn",
+      id: v1(),
+      title: "Sixth Page",
+      body: "this is the Sixth page",
+      createdAt: new Date(),
+      createdFor: new Date(2020, 9, 12),
+    },
+    {
+      id: v1(),
+      title: "Fifth Page",
+      body: "this is the Fifth page",
+      createdAt: new Date(),
+      createdFor: new Date(2019, 8, 17),
+    },
+    {
+      id: v1(),
+      title: "Fourth Page",
+      body: "this is the Fourth page",
+      createdAt: new Date(),
+      createdFor: new Date(2018, 11, 24),
+    },
+    {
+      id: v1(),
       title: "Third Page",
       body: "this is the Third page",
-      createdAt: new Date(2020, 9, 12),
+      createdAt: new Date(),
+      createdFor: new Date(2017, 11, 24),
     },
     {
-      id: "dfgrdgewfrerfe",
+      id: v1(),
       title: "Second Page",
       body: "this is the Second page",
-      createdAt: new Date(2019, 8, 17),
+      createdAt: new Date(),
+      createdFor: new Date(2016, 11, 24),
     },
     {
-      id: "ewdfeswdgfrdfgdr",
+      id: v1(),
       title: "First Page",
       body: "this is the first page",
-      createdAt: new Date(2018, 11, 24),
+      createdAt: new Date(),
+      createdFor: new Date(2015, 11, 24),
     },
   ],
 };
@@ -45,12 +70,20 @@ const pageReducer = (state = initialState, action) => {
         filterData: state?.filterData?.filter((page) => page.id !== action.payload),
         pages: state.pages.filter((page) => page.id !== action.payload),
       };
-    case EDIT_PAGE:
+    case EDIT_PAGE:{
+      let pages = [...state.pages]
+      for (let index in pages) {
+        if (pages[index].id === action.payload.id ){
+          pages[index] = action.payload
+        } 
+      }
+
       return {
         ...state,
         filterData: undefined,
-        pages: action.payload,
-      };
+        pages: pages
+      }
+    };
     case SORT_ACCORDING_TO_DATE: {
       let currPages = [...state.pages];
       if(state.filterData){
@@ -60,14 +93,13 @@ const pageReducer = (state = initialState, action) => {
 
       if (sortType === "desc") {
         currPages = currPages.sort((b, a) => {
-          return a.createdAt - b.createdAt;
+          return a.createdFor - b.createdFor;
         });
       } else {
         currPages = currPages.sort((a, b) => {
-          return a.createdAt - b.createdAt;
+          return a.createdFor - b.createdFor;
         });
       }
-      console.log("Pages", currPages, sortType);
       if(state.filterData){
         return {
           ...state,
@@ -84,7 +116,7 @@ const pageReducer = (state = initialState, action) => {
       const { pages } = state;
       const { startDate, endDate } = action;
       const filterData = pages.filter((item) => {
-        const currItemDate = item.createdAt;
+        const currItemDate = item.createdFor;
         console.log(startDate, currItemDate, endDate);
         return currItemDate >= startDate && currItemDate <= endDate;
       });

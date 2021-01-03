@@ -11,8 +11,10 @@ function EditPage(props) {
   const page = props.pages.filter(
     (page) => page.id === props.match.params.id
   )[0];
+  let date = page.createdFor.toISOString().substring(0,10)
   const [title, setTitle] = useState(page.title);
   const [body, setBody] = useState(page.body);
+  const [createdFor, setCreatedFor] = useState(page.body);
   const handleSubmit = (e) => {
     e.preventDefault();
     const newPage = {
@@ -20,28 +22,48 @@ function EditPage(props) {
       title,
       body,
       createdAt: page.createdAt,
+      createdFor:createdFor
     };
 
-    let newPages = props.pages.filter((page) => page.id === props.match.params.id)
-    newPages.push(newPage)
-    props.editPage(newPages);
+
+    props.editPage(newPage);
     history.push("/");
   };
   return (
-    <div>
-      <h1>Edit page with id = {props.match.params.id}</h1>
+    <div className="createpage">
+      <h1>
+        Edit Note
+      </h1>
       <form className="createpage__form" noValidate>
-        <TextField
-          id="date"
-          label="Title"
-          type="text"
-          className="createpage__input"
-          defaultValue={page.title}
-          InputLabelProps={{
-            shrink: true,
-          }}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+        <div className="createpage__header">
+          <div className="createpage__title">
+          <TextField
+            id="date"
+            label="Title"
+            type="text"
+            style={{width: "100%"}}
+            defaultValue={page.title}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          </div>
+          <div className="createpage__date">
+          <TextField
+            id="date"
+            label="Start Date"
+            type="date"
+            defaultValue={date}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={(e) => setCreatedFor(new Date(e.target.value))}
+          />
+          </div>
+        </div>
+        <br/>
+        <br/>
         <TextareaAutosize
           className="createpage__input"
           aria-label="empty textarea"
@@ -49,13 +71,14 @@ function EditPage(props) {
           rowsMin={10}
           defaultValue={page.body}
           onChange={(e) => setBody(e.target.value)}
-        ></TextareaAutosize>
+        />
+        <br/>
         <Button
           onClick={handleSubmit}
           className="createpage__button"
           color="inherit"
         >
-          Edit
+          Add
         </Button>
       </form>
     </div>

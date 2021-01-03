@@ -4,7 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import {Link} from "react-router-dom"
+import {NavLink} from "react-router-dom"
 
 const useStyles = makeStyles(() => ({
   title: {
@@ -17,11 +17,11 @@ function Navbar() {
   return (
     <div>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar >
           <Typography variant="h6" className={classes.title}>
-          <Link className="link" to="/">Diary</Link>
+          <NavLink  style={{ textDecoration: 'none', color: "white" }} to="/">Diary</NavLink>
           </Typography>
-          <Button color="inherit"><Link to="/page/new">Create Page</Link></Button>
+          <Button color="secondary"><NavLink style={{ textDecoration: 'none', color: "white" }} to="/page/new">Create Page</NavLink></Button>
         </Toolbar>
       </AppBar>
     </div>

@@ -24,7 +24,6 @@ export const editPage = (page) => {
 
 
 export const sortAccordingToDate = (sortType) => {
-    console.log(sortType);
     return {
         type: SORT_ACCORDING_TO_DATE,
         sortType

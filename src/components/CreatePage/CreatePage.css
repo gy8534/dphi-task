@@ -4,11 +4,23 @@
     height: 100%;
 }
 
-.createpage__input{
+.createpage__header{
+    display: flex;
+}
+
+.createpage__title{
+    flex: 1;
+    margin: 10px;
+}
+
+.createpage__date{
     margin: 10px;
 }
 
 .createpage__button{
     width: 10%;
-    margin: 10px;
+}
+
+.ck-editor__editable {
+    min-height: 250px !important;
 }

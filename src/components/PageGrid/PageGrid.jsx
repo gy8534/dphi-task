@@ -8,13 +8,14 @@ class PageGrid extends Component {
 
   render() {
     const pages = this.props.filterData || this.props.pages;
+    console.log(pages)
     return (
       <div>
       <h1>Your Diary</h1>
       <Grid container spacing={3}>
-        {pages.map(({id, title, body, createAt}) => (
+        {pages.map(({id, title, body, createdFor}) => (
           <Grid  key={id} item xs={4}>
-            <GridItem id={id} title={title} body={body} createAt={createAt}/>
+            <GridItem id={id} title={title} body={body} createdFor={createdFor}/>
           </Grid>
         ))}
       </Grid>

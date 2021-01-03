@@ -50,6 +50,7 @@ function InputGroup({
           }}
           onChange={(e) => setStartDate(new Date(e.target.value))}
         />
+        
         <TextField
           id="date"
           label="End Date"
@@ -61,10 +62,10 @@ function InputGroup({
           }}
           onChange={(e) => setEndDate(new Date(e.target.value))}
         />
-        <Button onClick={handleClick} className="input" color="inherit">
+        <Button onClick={handleClick} className="input" color="primary">
           Filter
         </Button>
-        <Button onClick={handleReset} className="input" color="inherit">
+        <Button onClick={handleReset} className="input" color="primary">
           RESET
         </Button>
       </form>
